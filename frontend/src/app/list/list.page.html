@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Games List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-searchbar icon="search-outline" [(ngModel)]="searchGame" showCancelButton="focus" animated placeholder="Search your games here"></ion-searchbar>
+
+  <ion-list class="game-list">
+    <ion-item *ngFor="let game of Games | filter:searchGame">
+      <ion-label>
+        <ion-grid>
+          <ion-row class="title-platform-container">
+
+            <p class="title">{{game.title}}</p>
+            <p>{{game.genre}}</p>
+            <p class="platform">{{game.platform}}</p>
+
+          </ion-row>
+
+
+          <ion-row>
+
+            <ion-col size="4">
+              <img *ngIf="game.filename" src="http://localhost:8080/images/{{game.filename}}" alt="image"/>
+              <p class="ion-text-wrap">{{game.release_date}}</p>
+            </ion-col>
+
+            <ion-col size="4">
+              <h2 class="score-text">Meta Score</h2>
+              <div class="score">{{game.meta_score}}</div>
+            </ion-col>
+
+            <ion-col size="4">
+              <h2 class="score-text">User Score</h2>
+              <div class="score">{{game.user_score}}</div>
+            </ion-col>
+
+          </ion-row>
+
+          
+
+          <ion-col size="8">
+            <p class="ion-text-wrap">{{game.description}}</p>
+          </ion-col>
+
+
+          <ion-row class="buttons">
+            
+
+            <ion-button color="success" clear [routerLink]="['/update/', game.id]">Update</ion-button>
+            <ion-button color="danger" clear (click)="removeGame(game)">Delete</ion-button>
+          </ion-row>
+
+
+
+
+
+
+
+
+
+
+
+
+        </ion-grid>
+
+      </ion-label>
+
+    </ion-item>
+  </ion-list>
+
+</ion-content>

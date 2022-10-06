@@ -1,0 +1,7 @@
+{
+  "name": "frontend-ionic-game-collection",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
