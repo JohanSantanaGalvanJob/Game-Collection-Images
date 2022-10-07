@@ -51,7 +51,7 @@ export class GameCrudService {
       );
   }
 
-  updateGame(id, game: Game, blob): Observable<any> {
+  updateGame(id, game, blob): Observable<any> {
     let data = new URLSearchParams();
     data.append("title", game.title);
     data.append("platform", game.platform);
@@ -61,7 +61,7 @@ export class GameCrudService {
     data.append("user_score", game.user_score.toString());
     data.append("release_date", game.release_date);
     data.append("file", blob)
-    return this.httpClient.put(this.endpoint + '/' + id, data)
+    return this.httpClient.put<Game>(this.endpoint + '/' + id, data)
       .pipe(
         tap(_ => console.log(`Game updated: ${id}`)),
         catchError(this.handleError<Game[]>('Update game'))

@@ -16,7 +16,8 @@ export class UpdatePage implements OnInit {
 
   updateGameFg: FormGroup;
   id: any;
-  capturedPhoto: string = "";
+  isSubmitted: boolean = false;
+  capturedPhoto: string;
 
   constructor(
     private gameCrudService: GameCrudService,
@@ -28,6 +29,12 @@ export class UpdatePage implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
+  // ionViewWillEnter() {
+  //   this.updateGameFg.reset();
+  //   this.isSubmitted = false;
+  //   this.capturedPhoto = "";
+  // }
+
   ngOnInit() {
     this.fetchGame(this.id);
     this.updateGameFg = this.formBuilder.group({
@@ -37,9 +44,11 @@ export class UpdatePage implements OnInit {
       genre:[''],
       meta_score:[''],
       user_score:[''],
-      release_date:['']
+      release_date:[''],
     })
   }
+
+ 
 
   takePhoto() {
     // DECOMMENT:
@@ -67,9 +76,10 @@ export class UpdatePage implements OnInit {
         title: data['title'],
         description: data['description'],
         genre: data['genre'],
-        user_score: data['user_score'],
         meta_score: data['meta_score'],
-        release_date: data['release_date']
+        user_score: data['user_score'],
+        release_date: data['release_date'],
+        
       });
     });
   }
@@ -78,12 +88,14 @@ export class UpdatePage implements OnInit {
     if (!this.updateGameFg.valid) {
       return false;
     } else {
-
+      
       let blob = null;
       if (this.capturedPhoto != "") {
         const response = await fetch(this.capturedPhoto);
+        console.log("sosssssssssssss")
         blob = await response.blob();
       }
+
       this.gameCrudService.updateGame(this.id, this.updateGameFg.value,blob)
         .subscribe(() => {
           this.updateGameFg.reset();

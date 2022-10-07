@@ -44,76 +44,88 @@ exports.findAll = (req, res) => {
   })
 };
 
-// Find a single Bicycle with an id
+// Find a single Game with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Bicycle.findByPk(id)
+  Game.findByPk(id)
     .then(data => {
       if (data) {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Manga with id=${id}.`
+          message: `Cannot find Game with id=${id}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Manga with id=" + id
-      });
-    });
-}
-
-// Update a Bicycle by the id in the request
-exports.update = (req, res) => {
-  const id = req.params.id;
-  console.log(req.body.file)
-  console.log(req.body.filename)
-  Bicycle.update({title: req.body.title, pages: req.body.pages, volume: req.body.volume, genre: req.body.genre, filename: req.body.filename}, {
-    where: { id: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Manga was updated successfully."
-        });
-      } else {
-      console.log("HE PASADO POR AQUI");
-      console.log(num);
-        res.send({
-          message: `Cannot update Manga with id=${id}. Maybe Manga was not found or req.body is empty!`
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error updating Manga with id=" + id
+        message: "Error retrieving Game with id=" + id
       });
     });
 };
 
-// Delete a Bicycle with the specified id in the request
-exports.delete = (req, res) => {
+// Update a Game by the id in the request
+exports.update = (req, res) => {
   const id = req.params.id;
+  console.log(req.body.file)
+  console.log(req.body.filename)
 
-  Bicycle.destroy({
+  const game = {
+    platform: req.body.platform,
+    title: req.body.title,
+    description:req.body.description,
+    genre:req.body.genre,
+    meta_score:req.body.meta_score,
+    user_score:req.body.user_score,
+    release_date: req.body.release_date,
+   filename: req.file ? req.file.filename : ""
+  }
+
+  Game.update(game, {
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Manga was deleted successfully!"
+          message: "Game was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot delete Manga with id=${id}. Maybe Manga was not found!`
+          message: `Cannot update Game with id=${id}. Maybe Game was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Manga with id=" + id
+        message: "Error updating Game with id=" + id
+      });
+    });
+};
+
+
+
+// Delete a Game with the specified id in the request
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Game.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Game was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Game with id=${id}. Maybe Game was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Game with id=" + id
       });
     });
 };
