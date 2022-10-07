@@ -52,7 +52,7 @@ export class GameCrudService {
   }
 
   updateGame(id, game, blob): Observable<any> {
-    let data = new URLSearchParams();
+    let data = new FormData();
     data.append("title", game.title);
     data.append("platform", game.platform);
     data.append("description", game.description);
@@ -61,6 +61,22 @@ export class GameCrudService {
     data.append("user_score", game.user_score.toString());
     data.append("release_date", game.release_date);
     data.append("file", blob)
+    return this.httpClient.put<Game>(this.endpoint + '/' + id, data)
+      .pipe(
+        tap(_ => console.log(`Game updated: ${id}`)),
+        catchError(this.handleError<Game[]>('Update game'))
+      );
+  }
+
+  updateGameNoFile(id, game): Observable<any> {
+    let data = new FormData();
+    data.append("title", game.title);
+    data.append("platform", game.platform);
+    data.append("description", game.description);
+    data.append("genre", game.genre);
+    data.append("meta_score", game.meta_score.toString());
+    data.append("user_score", game.user_score.toString());
+    data.append("release_date", game.release_date);
     return this.httpClient.put<Game>(this.endpoint + '/' + id, data)
       .pipe(
         tap(_ => console.log(`Game updated: ${id}`)),

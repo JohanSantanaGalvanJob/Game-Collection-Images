@@ -18,6 +18,7 @@ export class UpdatePage implements OnInit {
   id: any;
   isSubmitted: boolean = false;
   capturedPhoto: string;
+  filename: string;
 
   constructor(
     private gameCrudService: GameCrudService,
@@ -29,11 +30,10 @@ export class UpdatePage implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
   }
 
-  // ionViewWillEnter() {
-  //   this.updateGameFg.reset();
-  //   this.isSubmitted = false;
-  //   this.capturedPhoto = "";
-  // }
+  ionViewWillEnter() {
+    this.isSubmitted = false;
+    // this.capturedPhoto = "";
+  }
 
   ngOnInit() {
     this.fetchGame(this.id);
@@ -41,14 +41,14 @@ export class UpdatePage implements OnInit {
       platform: [''],
       title: [''],
       description: [''],
-      genre:[''],
-      meta_score:[''],
-      user_score:[''],
-      release_date:[''],
+      genre: [''],
+      meta_score: [''],
+      user_score: [''],
+      release_date: ['']
     })
   }
 
- 
+
 
   takePhoto() {
     // DECOMMENT:
@@ -79,28 +79,37 @@ export class UpdatePage implements OnInit {
         meta_score: data['meta_score'],
         user_score: data['user_score'],
         release_date: data['release_date'],
-        
       });
+      this.filename = data['filename'];
     });
+    console.log(this.filename)
   }
 
   async onSubmit() {
     if (!this.updateGameFg.valid) {
       return false;
     } else {
-      
+
       let blob = null;
       if (this.capturedPhoto != "") {
         const response = await fetch(this.capturedPhoto);
         console.log("sosssssssssssss")
         blob = await response.blob();
       }
-
-      this.gameCrudService.updateGame(this.id, this.updateGameFg.value,blob)
+      if (this.capturedPhoto != "") {
+      this.gameCrudService.updateGame(this.id, this.updateGameFg.value, blob)
         .subscribe(() => {
           this.updateGameFg.reset();
           this.router.navigate(['/list']);
         })
+      }
+      else{
+        this.gameCrudService.updateGameNoFile(this.id, this.updateGameFg.value)
+        .subscribe(() => {
+          this.updateGameFg.reset();
+          this.router.navigate(['/list']);
+        })
+      }
     }
   }
 

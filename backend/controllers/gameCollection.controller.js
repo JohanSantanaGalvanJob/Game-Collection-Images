@@ -5,7 +5,7 @@ const Op = db.Sequelize.Op;
 // Create and Save a new Game
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.platform || !req.body.title || !req.body.genre){
+  if (!req.body.platform || !req.body.title || !req.body.genre) {
     res.status(400).send({
       message: "Content cannot be empty!"
     });
@@ -15,12 +15,12 @@ exports.create = (req, res) => {
   const game = {
     platform: req.body.platform,
     title: req.body.title,
-    description:req.body.description,
-    genre:req.body.genre,
-    meta_score:req.body.meta_score,
-    user_score:req.body.user_score,
+    description: req.body.description,
+    genre: req.body.genre,
+    meta_score: req.body.meta_score,
+    user_score: req.body.user_score,
     release_date: req.body.release_date,
-   filename: req.file ? req.file.filename : ""
+    filename: req.file ? req.file.filename : ""
   }
 
   // Save Game in the database
@@ -74,12 +74,12 @@ exports.update = (req, res) => {
   const game = {
     platform: req.body.platform,
     title: req.body.title,
-    description:req.body.description,
-    genre:req.body.genre,
-    meta_score:req.body.meta_score,
-    user_score:req.body.user_score,
+    description: req.body.description,
+    genre: req.body.genre,
+    meta_score: req.body.meta_score,
+    user_score: req.body.user_score,
     release_date: req.body.release_date,
-   filename: req.file ? req.file.filename : ""
+    filename: req.file ? req.file.filename : ""
   }
 
   Game.update(game, {

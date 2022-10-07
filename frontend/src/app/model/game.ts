@@ -7,6 +7,7 @@ export class Game {
     meta_score:number;
     user_score:number;
     release_date:string;
+    filename?:string;
 
     constructor(platform: string,title:string,description:string,genre:string,meta_score:number,user_score:number,release_date:string) {
         this.platform = platform;
