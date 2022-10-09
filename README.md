@@ -12,7 +12,9 @@ Visual Studio Code can be useful for your frontend part. https://code.visualstud
 
 ## Backend Part
 
+We need to install Express using npm install express and then install Sequelize using npm install Sequelize mysql2.
 
+With these simple commands you should be able to start with your own project.
 
 ## DATA API Used
 
