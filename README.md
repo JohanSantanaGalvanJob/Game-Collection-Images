@@ -1,12 +1,10 @@
 # Game Collection App
 
-This is my own personal project on which I have developed a full-stack page using Spring and IONIC technologies.
+This is my own personal project on which I have developed a full-stack page using Express, Sequelize, Multer for the images and IONIC technologies.
 
 ## Pre-requisites
 
-You may install Eclipse because it has a well preparated structure in order to perform your backend part. https://www.eclipse.org/downloads/
-
-It is also neccesary to instal MySQL workbench and the server itself and also create a database, put a table and introduce some information. https://www.mysql.com/downloads/
+It is necesary to instal MySQL workbench and the server itself and also create a database, put a table and introduce some information. https://www.mysql.com/downloads/
 
 It is completely necesary to install Node.js for the dependencies and the packages you will need in the frontend and backend part. https://nodejs.org/en/download/
 
@@ -14,15 +12,7 @@ Visual Studio Code can be useful for your frontend part. https://code.visualstud
 
 ## Backend Part
 
-Now that you have Eclipse IDE you may also install Spring in the eclipse marketplace. Once you have done it, you should make a project and separate the java classes in packages for a better controlling. The Java classes are the controller, some interfaces, DAO, and the skeleton where all the variables are going to be introduced, and the services. You have also to take in count the application.properties because we will need it in order to connect to the database (model).
 
-As for the java classes itself. First of all in the GameCollectionApp.java you need to create the constructor and the getters and setters of all the variables you are going to add in your app. It is also important to create an empty constructor.
-
-The service part has an interface with all the CRUD methods and the service itself which is only the fully implementation of those methods.
-
-DAO part is only an extension for a class called CrudRepository which is implemented in the project.
-
-Finally, the controller is the part where a the link connects to the methods made in the service part.
 
 ## DATA API Used
 
