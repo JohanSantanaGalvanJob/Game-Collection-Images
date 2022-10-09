@@ -9,7 +9,7 @@ export class Game {
     release_date:string;
     filename?:string;
 
-    constructor(platform: string,title:string,description:string,genre:string,meta_score:number,user_score:number,release_date:string) {
+    constructor(platform: string,title:string,description:string,genre:string,meta_score:number,user_score:number,release_date:string,filename:string) {
         this.platform = platform;
         this.title=title;
         this.description=description;
@@ -17,6 +17,7 @@ export class Game {
         this.meta_score=meta_score;
         this.user_score=user_score;
         this.release_date=release_date;
+        this.filename=filename;
      }
 }
 

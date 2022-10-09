@@ -32,7 +32,8 @@ export class UpdatePage implements OnInit {
 
   ionViewWillEnter() {
     this.isSubmitted = false;
-    // this.capturedPhoto = "";
+    //this.capturedPhoto = "";
+
   }
 
   ngOnInit() {
@@ -99,14 +100,8 @@ export class UpdatePage implements OnInit {
       if (this.capturedPhoto != "") {
       this.gameCrudService.updateGame(this.id, this.updateGameFg.value, blob)
         .subscribe(() => {
-          this.updateGameFg.reset();
-          this.router.navigate(['/list']);
-        })
-      }
-      else{
-        this.gameCrudService.updateGameNoFile(this.id, this.updateGameFg.value)
-        .subscribe(() => {
-          this.updateGameFg.reset();
+          
+          this.capturedPhoto=this.filename;
           this.router.navigate(['/list']);
         })
       }
